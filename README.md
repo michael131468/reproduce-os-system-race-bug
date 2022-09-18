@@ -96,7 +96,7 @@ threads are not copy-on-write as that should avoid the environment variable
 pointer reference for the threads being affected by the parent thread. I
 plan to continue to dig into this issue further to learn more about this.
 
-Race condition issues with putenv have been long documented [5] so I suspect
+Race condition issues with putenv have been long documented [6] so I suspect
 this is nothing new to most C developers. Now that I knew what I was searching
 for, I could find a bug [7] had been filed to the Python project to document
 that os.environ is not thread-safe for this exact issue.
