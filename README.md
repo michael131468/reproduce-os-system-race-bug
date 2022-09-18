@@ -97,9 +97,13 @@ pointer reference for the threads being affected by the parent thread. I
 plan to continue to dig into this issue further to learn more about this.
 
 Race condition issues with putenv have been long documented [5] so I suspect
-this is nothing new to most C developers. To see this manifest in a higher
-level language like Python shows that it's still important for developers to
-learn and understand how the operating system works.
+this is nothing new to most C developers. Now that I knew what I was searching
+for, I could find a bug [7] had been filed to the Python project to document
+that os.environ is not thread-safe for this exact issue.
+
+To see this issue manifest in a higher level language like Python shows that
+it's still important for developers who are working in abstractions far above
+the operating system to learn and understand how the operating system works.
 
 [1] https://github.com/unbit/uwsgi/issues/2447
 
@@ -112,6 +116,8 @@ learn and understand how the operating system works.
 [5] https://github.com/lattera/glibc/blob/master/stdlib/setenv.c#L109
 
 [6] http://www.club.cc.cmu.edu/~cmccabe/blog_the_setenv_fiasco.html
+
+[7] https://bugs.python.org/issue39375
 
 # How to run
 
