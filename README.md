@@ -6,10 +6,10 @@ using os.environ.
 
 # About
 
-Note that I believe this is actually a little bit deeper than just Python's
+**Note that I believe this is actually a little bit deeper than just Python's
 os.system and the reproduction case in this repository shows that execve has
 a potential race condition with glibc's putenv when adding environment variables
-from a separate thread.
+from a separate thread.**
 
 This code is the result of investigating a random race condition bug in the
 setup.py of uWSGI [1]. This bug manifested on my eight core laptop very
@@ -100,10 +100,15 @@ level language like Python shows that it's still important for developers to
 learn and understand how the operating system works.
 
 [1] https://github.com/unbit/uwsgi/issues/2447
+
 [2] https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/fs/exec.c#n514
+
 [3] https://github.com/unbit/uwsgi/blob/2.0.20/uwsgiconfig.py
+
 [4] https://github.com/unbit/uwsgi/blob/2.0.20/plugins/python/uwsgiplugin.py#L65
+
 [5] https://github.com/lattera/glibc/blob/master/stdlib/setenv.c#L109
+
 [6] http://www.club.cc.cmu.edu/~cmccabe/blog_the_setenv_fiasco.html
 
 # How to run
