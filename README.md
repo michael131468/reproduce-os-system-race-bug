@@ -56,7 +56,9 @@ I dissected further how the uWSGI python build works and learned that the build
 is divided into three main steps:
 
   (1) compile the core code
+
   (2) compile the plugins
+
   (3) link the uwsgi binary together
 
 I discovered if I toggled off the plugins compilation step then the bug would
