@@ -76,7 +76,7 @@ using `os.environ` while `execve` is being run by a thread then there is a
 possibility that the execve call will fail. I believe this is because the
 environment variables pointer being reallocated by `putenv` in glibc [5] leads
 to a race with execve which will fail to access the original pointer during
-its copying of the values.
+its copying of the values. _(I have not verified this)._
 
 I could then build the reproduction case in this repo with this informaton.
 The reproduction case spawns 8 worker threads and feeds them with requests to
@@ -84,7 +84,7 @@ echo helloworld to /dev/null. In parallel to the worker threads, the main Python
 process constantly adds environment variables using os.environ. On my laptop,
 the workers consistently showed some random execution failures where os.system
 returned an error. Applying strace (see run.sh) showed that the execve calls
-would fail with -1 EFAULT which matched the bug seen in uWSGI.
+would fail with `-1 EFAULT` which matched the bug seen in uWSGI.
 
 I am still working out some of the details to understand this but the
 reproduction case is clear. The python os.system command is not thread safe
