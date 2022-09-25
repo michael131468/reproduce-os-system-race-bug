@@ -147,3 +147,20 @@ $ ./run.sh
 [thread 4][os.system failure] ouch! return code = 32512
 [thread 6][os.system failure] ouch! return code = 32512
 ```
+
+# C Example
+
+I've added a smaller example in C that shows this behaviour using system.3 and putenv.3.
+
+Compile with `make all` and run with the `make run`.
+
+```
+$ make all
+gcc main.c -o main
+
+$ make run
+strace -f -s99999 -e trace=execve -e quiet="attach,exit,thread-execve" -Z ./main 2>&1 | grep -v "\-\-\-"
+[pid 3099883] execve("/bin/sh", ["sh", "-c", "echo helloworld > /dev/null"], 0x1212120 /* 16 vars */) = -1 EFAULT (Bad address)
+cmd failed! error=32512
+302 successful runs before failure
+```
